@@ -2,20 +2,20 @@ const fileName = process.argv[2];
 const fs = require('fs');
 
 const merge = (arr1, arr2) => {
-  let sortedMerge = []
+  let results = []
   while (arr1.length > 0 && arr2.length > 0) {
     if (arr1[0] > arr2[0]) {
-      sortedMerge.push(arr2[0])
+      results.push(arr2[0])
       arr2.shift()
     } else {
-      sortedMerge.push(arr1[0])
+      results.push(arr1[0])
       arr1.shift()
     }
   }
-  return [...sortedMerge, ...arr1, ...arr2]
+  return [...results, ...arr1, ...arr2]
 }
 
-function mergeSort(unsortedArray) {
+const mergeSort = unsortedArray => {
   if (unsortedArray.length <= 1) {
     return unsortedArray;
   }
@@ -26,36 +26,31 @@ function mergeSort(unsortedArray) {
 }
 
 
+// let tab = [8, 1, 2, 0, 12, 10, 3, 21, Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)]
 
-let tab = [8, 1, 2, 0, 12, 10, 3, 21, Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)]
-
-
-// console.log(merge([1], [2]))
 
 // lecture et création du tableau à partir du fichier text
 fs.readFile(fileName, text => {
   var text = fs.readFileSync(fileName).toString('utf-8');
   let arr = text.split(' ').map(el => parseInt(el))
-  // console.log(arr)
-  // bubbleSort(arr)
-  // insertionSortIt(arr)
-  // placePivot(arr)
   console.log(mergeSort(arr))
-
 });
 
+// ------------------------------------------------------------------------------------------------------------------------
+
+const sujet2A = [3, 7, 8, 3, 6, 1]
+const sujet2B = [1, 4, 5, 8]
 
 const exo1 = (arr, k) => {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 1; j < arr.length; j++)
-      if (arr[i] + arr[j] === k)
-        return true
+      if (i !== j) {
+        if (arr[i] + arr[j] === k)
+          return true
+      }
   }
 }
-
-// console.log(exo1([10, 15, 3, 6], 16))
-const sujet2A = [3, 7, 8, 3, 6, 1]
-const sujet2B = [1, 4, 5, 8]
+console.log(exo1([10, 15, 3, 7], 17))
 
 const exo2 = (arr) => {
   let sunnyBuildings = []
@@ -74,22 +69,9 @@ const exo2 = (arr) => {
   }
   return sunnyBuildings.length + 1
 }
+// console.log(exo2(sujet2A))
 // console.log(exo2(sujet2B))
 
-
-
-const exo6 = arr => {
-  let nb = 1
-  let max = arr[arr.length - 1]
-  for (let i = arr.length - 2; i >= 0; i--) {
-    if (arr[i] > max) {
-      max = arr[i]
-      nb += 1
-    }
-  }
-  return nb
-}
-// console.log(exo6(sujet2A))
 
 const exo4 = arr => {
   let sunnyBuildings = [arr[0]]
@@ -104,7 +86,7 @@ const exo4 = arr => {
   return sunnyBuildings.length
 }
 
-
 // console.log(exo4(sujet2A))
+// console.log(exo4(sujet2B))
 
 

@@ -1,5 +1,5 @@
-// const fileName = process.argv[2];
-// const fs = require('fs');
+const fileName = process.argv[2];
+const fs = require('fs');
 
 const merge = (arr1, arr2) => {
   let sortedMerge = []
@@ -15,64 +15,34 @@ const merge = (arr1, arr2) => {
   return [...sortedMerge, ...arr1, ...arr2]
 }
 
-// console.log(merge([10], [1]))
-var nbImbrications = 0
-
-const mergeSort = (arr, lengthSort = arr.length) => {
-  console.log("nb imbrications = ", nbImbrications += 1)
-  console.log("tableau de départ :", arr)
-  let sortedArray = []
-  let remainingArray = arr
-  console.log(remainingArray)
-  if (remainingArray.length == 0) {
-    // console.log("remaining array est vide")
-    return sortedArray
+function mergeSort(unsortedArray) {
+  if (unsortedArray.length <= 1) {
+    return unsortedArray;
   }
-  while (remainingArray.length > 0 && sortedArray.length < lengthSort) {
-    // console.log("je refais un tour")
-    // console.log("remaining array debut de boucle :", remainingArray)
-    // console.log("sorted array debut de boucle :", sortedArray)
-    if (sortedArray.length > 0) {
-      // console.log("le sorted Array est de longueur", sortedArray.length, sortedArray)
-      let nextSortedArray = mergeSort(remainingArray, sortedArray.length)
-      console.log("nb imbrications = ", nbImbrications -= 1)
-      console.log("le sorted Array est de longueur", nextSortedArray.length, sortedArray)
-      console.log("le next sorted Array est de longueur", nextSortedArray.length, nextSortedArray)
-      // remainingArray.splice(0, sortedArray.length)
-      sortedArray = merge(sortedArray, nextSortedArray)
-      console.log("le sorted Array mergé est de longueur", sortedArray.length, sortedArray)
-    }
-    else if (remainingArray.length > 1) {
-      // console.log("le remaining Array est de longueur", remainingArray.length, remainingArray)
-      sortedArray = merge(remainingArray.splice(0, 1), remainingArray.splice(0, 1))
-      // console.log("remaining array post merge :", remainingArray)
-      // console.log("sorted array post merge :", sortedArray)
-    }
-    else {
-      // console.log("le remaining Array est de longueur", remainingArray.length, remainingArray)
-      sortedArray = remainingArray
-      // console.log("remaining array :", remainingArray)
-      // console.log("sorted array :", sortedArray)
-    }
-  }
-  return sortedArray
+  const middle = Math.floor(unsortedArray.length / 2);
+  const left = unsortedArray.slice(0, middle);
+  const right = unsortedArray.slice(middle);
+  return merge(mergeSort(left), mergeSort(right));
 }
+
+
 
 let tab = [8, 1, 2, 0, 12, 10, 3, 21, Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)]
 
 
 // console.log(merge([1], [2]))
 
-// // lecture et création du tableau à partir du fichier text
-// fs.readFile(fileName, text => {
-//   var text = fs.readFileSync(fileName).toString('utf-8');
-//   let arr = text.split(' ').map(el => parseInt(el))
-//   // console.log(arr)
-//   // bubbleSort(arr)
-//   // insertionSortIt(arr)
-//   // placePivot(arr)
+// lecture et création du tableau à partir du fichier text
+fs.readFile(fileName, text => {
+  var text = fs.readFileSync(fileName).toString('utf-8');
+  let arr = text.split(' ').map(el => parseInt(el))
+  // console.log(arr)
+  // bubbleSort(arr)
+  // insertionSortIt(arr)
+  // placePivot(arr)
+  console.log(mergeSort(arr))
 
-// });
+});
 
 
 const exo1 = (arr, k) => {
@@ -104,7 +74,7 @@ const exo2 = (arr) => {
   }
   return sunnyBuildings.length + 1
 }
-console.log(exo2(sujet2B))
+// console.log(exo2(sujet2B))
 
 
 
@@ -119,7 +89,7 @@ const exo6 = arr => {
   }
   return nb
 }
-console.log(exo6(sujet2A))
+// console.log(exo6(sujet2A))
 
 const exo4 = arr => {
   let sunnyBuildings = [arr[0]]
@@ -135,6 +105,6 @@ const exo4 = arr => {
 }
 
 
-console.log(exo4(sujet2A))
+// console.log(exo4(sujet2A))
 
 

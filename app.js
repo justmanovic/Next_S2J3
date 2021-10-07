@@ -90,3 +90,16 @@ const exo4 = arr => {
 // console.log(exo4(sujet2B))
 
 
+const exo6 = arr => {
+  let nb = 1
+  let max = arr[arr.length - 1]
+  for (let i = arr.length - 2; i >= 0; i--) {
+    if (arr[i] > max) {
+      max = arr[i]
+      nb += 1
+    }
+  }
+  return nb
+}
+console.log(exo6(sujet2A))
+console.log(exo6(sujet2B))
